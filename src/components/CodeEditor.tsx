@@ -1,5 +1,6 @@
 import CodeMirror from "@uiw/react-codemirror";
 import { xml } from "@codemirror/lang-xml";
+import { search } from "@codemirror/search";
 import { EditorView } from "@codemirror/view";
 import type { Extension } from "@codemirror/state";
 
@@ -23,7 +24,7 @@ export function CodeEditor({
 	className,
 	"aria-label": ariaLabel,
 }: CodeEditorProps) {
-	const extensions: Extension[] = [xml(), ...siteCodeMirrorTheme];
+	const extensions: Extension[] = [xml(), search(), ...siteCodeMirrorTheme];
 	if (readOnly) {
 		extensions.push(readOnlyExtension);
 	}
