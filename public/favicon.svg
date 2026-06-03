@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+	<rect width="512" height="512" rx="96" fill="#000000"/>
+	<!-- Center the icon perfectly both vertically and horizontally in the 512x512 rect. The original path is sized for a roughly 22x22 box, scaled up. Let's recalculate transform: -->
+	<g transform="translate(120, 120) scale(11)">
+		<path fill="#ffffff" d="M14.62 2.662a1.5 1.5 0 0 1 1.04 1.85l-4.431 15.787a1.5 1.5 0 0 1-2.889-.81L12.771 3.7a1.5 1.5 0 0 1 1.85-1.039ZM7.56 6.697a1.5 1.5 0 0 1 0 2.12L4.38 12l3.182 3.182a1.5 1.5 0 1 1-2.122 2.121L1.197 13.06a1.5 1.5 0 0 1 0-2.12l4.242-4.243a1.5 1.5 0 0 1 2.122 0Zm8.88 2.12a1.5 1.5 0 1 1 2.12-2.12l4.243 4.242a1.5 1.5 0 0 1 0 2.121l-4.242 4.243a1.5 1.5 0 1 1-2.122-2.121L19.621 12z" />
+	</g>
+
+	<!-- Add a small purple chip-like rect below the icon and center white "XSL" text inside it -->
+	<g>
+		<!-- Chip dimensions and position: width 152px, height 44px, radius 22px, centered horizontally, placed below icon area -->
+		<rect x="277" y="360" width="100" height="30" rx="15" fill="#4338ca"/>
+		<text x="327" y="377" text-anchor="middle" dominant-baseline="middle" font-family="system-ui" font-size="22" font-weight="bold" fill="#ffffff">XSL</text>
+	</g>
+</svg>

@@ -1,0 +1,144 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--color-card: var(--card);
+	--color-card-foreground: var(--card-foreground);
+	--color-primary: var(--primary);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-secondary: var(--secondary);
+	--color-secondary-foreground: var(--secondary-foreground);
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-accent: var(--accent);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-destructive: var(--destructive);
+	--color-border: var(--border);
+	--color-input: var(--input);
+	--color-ring: var(--ring);
+	--radius-sm: calc(var(--radius) - 4px);
+	--radius-md: calc(var(--radius) - 2px);
+	--radius-lg: var(--radius);
+	--radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+	--radius: 0.625rem;
+	--background: oklch(0.985 0.002 286);
+	--foreground: oklch(0.21 0.006 286);
+	--card: oklch(1 0 0);
+	--card-foreground: oklch(0.21 0.006 286);
+	--primary: oklch(0.45 0.18 264);
+	--primary-foreground: oklch(0.985 0.002 286);
+	--secondary: oklch(0.96 0.004 286);
+	--secondary-foreground: oklch(0.35 0.01 286);
+	--muted: oklch(0.96 0.004 286);
+	--muted-foreground: oklch(0.52 0.015 286);
+	--accent: oklch(0.955 0.01 264);
+	--accent-foreground: oklch(0.35 0.02 264);
+	--destructive: oklch(0.55 0.22 27);
+	--border: oklch(0.91 0.005 286);
+	--input: oklch(0.91 0.005 286);
+	--ring: oklch(0.55 0.15 264);
+	--syntax-comment: oklch(0.55 0.02 286);
+	--syntax-meta: oklch(0.5 0.12 300);
+	--syntax-tag: oklch(0.42 0.17 264);
+	--syntax-attr: oklch(0.48 0.14 220);
+	--syntax-string: oklch(0.42 0.14 155);
+	--syntax-number: oklch(0.48 0.14 55);
+	--syntax-keyword: oklch(0.45 0.16 310);
+	--syntax-punctuation: oklch(0.58 0.02 286);
+	--scrollbar-track: oklch(0.96 0.004 286);
+	--scrollbar-thumb: oklch(0.82 0.01 286);
+	--scrollbar-thumb-hover: oklch(0.72 0.015 286);
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--background: oklch(0.16 0.008 286);
+		--foreground: oklch(0.96 0.004 286);
+		--card: oklch(0.19 0.008 286);
+		--card-foreground: oklch(0.96 0.004 286);
+		--primary: oklch(0.72 0.14 264);
+		--primary-foreground: oklch(0.18 0.02 264);
+		--secondary: oklch(0.24 0.01 286);
+		--secondary-foreground: oklch(0.92 0.004 286);
+		--muted: oklch(0.24 0.01 286);
+		--muted-foreground: oklch(0.68 0.015 286);
+		--accent: oklch(0.26 0.02 264);
+		--accent-foreground: oklch(0.92 0.02 264);
+		--destructive: oklch(0.68 0.19 27);
+		--border: oklch(0.28 0.01 286);
+		--input: oklch(0.28 0.01 286);
+		--ring: oklch(0.62 0.12 264);
+		--syntax-comment: oklch(0.58 0.02 286);
+		--syntax-meta: oklch(0.72 0.08 300);
+		--syntax-tag: oklch(0.78 0.11 264);
+		--syntax-attr: oklch(0.76 0.09 220);
+		--syntax-string: oklch(0.78 0.11 155);
+		--syntax-number: oklch(0.78 0.11 75);
+		--syntax-keyword: oklch(0.76 0.12 310);
+		--syntax-punctuation: oklch(0.62 0.02 286);
+		--scrollbar-track: oklch(0.19 0.008 286);
+		--scrollbar-thumb: oklch(0.32 0.012 286);
+		--scrollbar-thumb-hover: oklch(0.4 0.014 286);
+	}
+}
+
+@layer base {
+	* {
+		@apply border-border;
+	}
+
+	html,
+	body,
+	#root {
+		@apply h-full;
+	}
+
+	body {
+		@apply bg-background text-foreground antialiased;
+		margin: 0;
+	}
+}
+
+.cm-editor {
+	color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+	.cm-editor {
+		color-scheme: dark;
+	}
+}
+
+.cm-scroller {
+	scrollbar-width: thin;
+	scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+.cm-scroller::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+
+.cm-scroller::-webkit-scrollbar-track {
+	background: var(--scrollbar-track);
+}
+
+.cm-scroller::-webkit-scrollbar-thumb {
+	background-color: var(--scrollbar-thumb);
+	border: 2px solid var(--scrollbar-track);
+	border-radius: 9999px;
+}
+
+.cm-scroller::-webkit-scrollbar-thumb:hover {
+	background-color: var(--scrollbar-thumb-hover);
+}
+
+.cm-scroller::-webkit-scrollbar-corner {
+	background: var(--scrollbar-track);
+}
