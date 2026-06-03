@@ -5,17 +5,22 @@ import { CodeEditor } from "@/components/CodeEditor";
 import { EditorPanel, OutputPanel } from "@/components/EditorPanel";
 import { defaultInputXml, defaultXslt } from "@/lib/samples";
 import { downloadText, transformXslt } from "@/lib/xslt";
+import { loadStored, storeValue } from "@/lib/storage";
 
 const TRANSFORM_DEBOUNCE_MS = 350;
 const REPOSITORY_URL = "https://github.com/Curstantine/xslt-transformer";
+const STORAGE_KEY_INPUT = "xslt-playground:input-xml";
+const STORAGE_KEY_XSLT = "xslt-playground:xslt";
 
 export default function App() {
-	const [inputXml, setInputXml] = useState(defaultInputXml);
-	const [xslt, setXslt] = useState(defaultXslt);
+	const [inputXml, setInputXml] = useState(() => loadStored(STORAGE_KEY_INPUT, defaultInputXml));
+	const [xslt, setXslt] = useState(() => loadStored(STORAGE_KEY_XSLT, defaultXslt));
 	const [output, setOutput] = useState("");
 	const [error, setError] = useState<string | null>(null);
 
 	const runTransform = useEffectEvent(() => {
+		storeValue(STORAGE_KEY_INPUT, inputXml);
+		storeValue(STORAGE_KEY_XSLT, xslt);
 		try {
 			setOutput(transformXslt(inputXml, xslt));
 			setError(null);
