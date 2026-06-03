@@ -1,4 +1,5 @@
 import { useEffect, useEffectEvent, useState } from "react";
+import { Code2 } from "lucide-react";
 
 import { CodeEditor } from "@/components/CodeEditor";
 import { EditorPanel, OutputPanel } from "@/components/EditorPanel";
@@ -6,8 +7,9 @@ import { defaultInputXml, defaultXslt } from "@/lib/samples";
 import { downloadText, transformXslt } from "@/lib/xslt";
 
 const TRANSFORM_DEBOUNCE_MS = 350;
+const REPOSITORY_URL = "https://github.com/Curstantine/xslt-transformer";
 
-function App() {
+export default function App() {
 	const [inputXml, setInputXml] = useState(defaultInputXml);
 	const [xslt, setXslt] = useState(defaultXslt);
 	const [output, setOutput] = useState("");
@@ -33,19 +35,32 @@ function App() {
 		downloadText(output, "transform-output.xml");
 	};
 
+	const handleCopy = () => {
+		if (!output || error) return;
+		navigator.clipboard.writeText(output);
+	};
+
 	return (
 		<div className="flex h-svh flex-col bg-background text-foreground">
-			<header className="flex shrink-0 items-center justify-between border-b border-border px-5 py-3">
-				<div>
-					<p className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
+			<header className="flex shrink-0 items-center border-b border-border px-5 py-2 gap-5">
+				<div className="flex-1">
+					<h1 className="text-lg font-semibold tracking-tight">XSLT Transformer</h1>
+					<p className="text-xs font-medium uppercase text-muted-foreground">
 						Playground
 					</p>
-					<h1 className="text-lg font-semibold tracking-tight">XSLT Transformer</h1>
 				</div>
 				<p className="hidden text-xs text-muted-foreground sm:block">
 					Browser-native XSLT 1.0 via{" "}
 					<code className="rounded bg-muted px-1.5 py-0.5 font-mono">XSLTProcessor</code>
 				</p>
+				<a
+					href={REPOSITORY_URL}
+					target="_blank"
+					rel="noopener noreferrer"
+					aria-label="GitHub repository"
+				>
+					<Code2 />
+				</a>
 			</header>
 
 			<main className="flex min-h-0 flex-1 flex-col gap-3 p-3">
@@ -67,10 +82,13 @@ function App() {
 					</EditorPanel>
 				</div>
 
-				<OutputPanel output={output} error={error} onDownload={handleDownload} />
+				<OutputPanel
+					output={output}
+					error={error}
+					onDownload={handleDownload}
+					onCopy={handleCopy}
+				/>
 			</main>
 		</div>
 	);
 }
-
-export default App;

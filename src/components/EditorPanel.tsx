@@ -1,4 +1,4 @@
-import { Download } from "lucide-react";
+import { Copy, Download } from "lucide-react";
 import type { ReactNode } from "react";
 
 import { CodeEditor } from "@/components/CodeEditor";
@@ -45,9 +45,10 @@ type OutputPanelProps = {
 	output: string;
 	error: string | null;
 	onDownload: () => void;
+	onCopy: () => void;
 };
 
-export function OutputPanel({ output, error, onDownload }: OutputPanelProps) {
+export function OutputPanel({ output, error, onDownload, onCopy }: OutputPanelProps) {
 	const hasOutput = output.length > 0;
 
 	return (
@@ -60,18 +61,24 @@ export function OutputPanel({ output, error, onDownload }: OutputPanelProps) {
 						? "Transformation result"
 						: "Waiting for input"
 			}
-			className="min-h-[220px] flex-none basis-[38%]"
+			className="min-h-55 flex-none basis-[38%]"
 			actions={
-				<Button
-					type="button"
-					variant="outline"
-					size="sm"
-					onClick={onDownload}
-					disabled={!hasOutput || Boolean(error)}
-				>
-					<Download />
-					Download
-				</Button>
+				<>
+					<Button type="button" variant="secondary" size="sm" onClick={onCopy}>
+						<Copy />
+						Copy
+					</Button>
+					<Button
+						type="button"
+						variant="outline"
+						size="sm"
+						onClick={onDownload}
+						disabled={!hasOutput || Boolean(error)}
+					>
+						<Download />
+						Download
+					</Button>
+				</>
 			}
 		>
 			{error ? (
